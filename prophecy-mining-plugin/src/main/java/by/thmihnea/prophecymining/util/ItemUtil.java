@@ -1,12 +1,11 @@
 package by.thmihnea.prophecymining.util;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ItemUtil {
 
@@ -16,15 +15,12 @@ public class ItemUtil {
         ItemMeta itemMeta = itemStack.getItemMeta();
         assert itemMeta != null;
 
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         itemMeta.setDisplayName(displayName);
         itemMeta.setLore(lore);
 
         itemStack.setItemMeta(itemMeta);
 
         return itemStack;
-    }
-
-    public static List<String> translateLoreColorCodes(List<String> lore) {
-        return lore.stream().map(string -> ChatColor.translateAlternateColorCodes('&', string)).collect(Collectors.toList());
     }
 }

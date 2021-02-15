@@ -1,11 +1,15 @@
 package by.thmihnea.prophecymining.cache;
 
 import by.thmihnea.prophecymining.ProphecyMining;
+import by.thmihnea.prophecymining.Settings;
 import by.thmihnea.prophecymining.data.TableType;
 import by.thmihnea.prophecymining.runnable.DataSyncTask;
+import by.thmihnea.prophecymining.util.LangUtil;
 import by.thmihnea.prophecymining.util.SQLUtil;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
@@ -77,6 +81,9 @@ public class MiningPlayer {
         int xpToNextLevel = this.xpToNextLevel;
         while (currentXp >= xpToNextLevel) {
             currentXp -= xpToNextLevel;
+            this.setLevelSQL(this.level + 1);
+            this.player.playSound(this.player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
+
             boolean incremental = ProphecyMining.getCfg().getBoolean("leveling.milestones.increment.enabled");
             if (incremental) {
                 xpToNextLevel = ProphecyMining.getCfg().getInt("leveling.milestones.increment.increment_value") * this.level;
@@ -85,7 +92,14 @@ public class MiningPlayer {
             }
             if (this.level == 50) xpToNextLevel = 0;
             this.setXpToNextLevelSQL(xpToNextLevel);
-            this.setLevelSQL(this.level + 1);
+
+            List<String> levelUpMessage = LangUtil.applyPlayerPlaceholder(this.player, LangUtil.applyLevelPlaceholder(this.getLevel(), Settings.LANG_LEVELUP_MESSAGE));
+            LangUtil.sendStringList(this.player, levelUpMessage);
+
+            String command = ProphecyMining.getCfg().getString("rewards.level_" + this.getLevel() + ".command");
+            if (command == null) continue;
+            if (command.contains("%player%")) command = command.replace("%player%", this.player.getName());
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
         }
         this.setCurrentXpSQL(currentXp);
     }

@@ -7,6 +7,15 @@ MySQL:
   username: "root"
   password: ""
 
+lang:
+  levelup_message:
+    - "&8&m----------------------------"
+    - ""
+    - "&eCongrats, %player%, you have leveled up"
+    - "&eto level %level%!"
+    - ""
+    - "&8&m----------------------------"
+
 xp:
   coal:
     start: 5
@@ -49,6 +58,10 @@ drops:
     material: "EMERALD"
     lore:
       - "&7This is an Emerald!"
+
+rewards:
+  level_2:
+    command: "give %player% diamond 20"
 
 
   # Milestone configuration

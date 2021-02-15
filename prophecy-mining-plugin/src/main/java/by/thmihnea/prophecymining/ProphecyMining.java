@@ -22,7 +22,7 @@ public class ProphecyMining extends AbstractPlugin {
 
     private SQLUtil sqlUtil;
 
-    private List<Listener> listenerList = Arrays.asList(
+    private final List<Listener> listenerList = Arrays.asList(
             new PlayerJoinListener(),
             new PlayerQuitListener(),
             new BlockBreakListener()

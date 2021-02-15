@@ -2,6 +2,7 @@ package by.thmihnea.prophecymining.item;
 
 import by.thmihnea.prophecymining.ProphecyMining;
 import by.thmihnea.prophecymining.util.ItemUtil;
+import by.thmihnea.prophecymining.util.LangUtil;
 import lombok.Getter;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -26,7 +27,7 @@ public class ItemCache {
             String materialName = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("drops." + key + ".material")));
             String displayName = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("drops." + key + ".name")));
             int chance = ProphecyMining.getCfg().getInt("drops." + key + ".chance");
-            List<String> lore = ItemUtil.translateLoreColorCodes(ProphecyMining.getCfg().getStringList("drops." + key + ".lore"));
+            List<String> lore = LangUtil.translateLoreColorCodes(ProphecyMining.getCfg().getStringList("drops." + key + ".lore"));
 
             Material material = Material.valueOf(materialName);
 

@@ -22,6 +22,7 @@ public class DataSyncTask implements Runnable {
     public void run() {
         if (!(this.player.isOnline())) {
             this.clear();
+            return;
         }
         MiningPlayer miningPlayer = MiningPlayerManager.getMiningPlayer(this.player);
         miningPlayer.uploadData();
