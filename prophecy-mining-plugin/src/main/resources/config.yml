@@ -1,0 +1,116 @@
+# test
+
+MySQL:
+  host: "localhost"
+  port: 3306
+  database: "prophecymining"
+  username: "root"
+  password: ""
+
+xp:
+  coal:
+    start: 5
+    end: 13
+  iron:
+    start: 6
+    end: 14
+  gold:
+    start: 8
+    end: 17
+  emerald:
+    start: 10
+    end: 20
+  lapis:
+    start: 12
+    end: 24
+  redstone:
+    start: 15
+    end: 30
+  diamond:
+    start: 16
+    end: 32
+
+drops:
+  amethyst:
+    name: "&5Amethyst"
+    material: "DIAMOND"
+    chance: 10
+    lore:
+      - "&7This is an Amethyst!"
+  ruby:
+    name: "&cRuby"
+    chance: 5
+    material: "REDSTONE"
+    lore:
+      - "&7This is a Ruby!"
+  gemstone:
+    name: "&aGemstone"
+    chance: 3
+    material: "EMERALD"
+    lore:
+      - "&7This is an Emerald!"
+
+
+  # Milestone configuration
+leveling:
+  milestones:
+    # Set this to enabled only if you want
+    # the amount of needed XP per level to
+    # increase with a set amount (i.e: Level 1
+    # is 2500, Level 2 is 2500*2, Level 3 is 2500*3 etc.)
+    increment:
+      enabled: false
+      increment_value: 2500
+    # Change these as you wish.
+    # These are set to match Hypixel Skyblock's level
+    # requirements. These are global!
+    level_1: 50
+    level_2: 125
+    level_3: 200
+    level_4: 300
+    level_5: 500
+    level_6: 750
+    level_7: 1000
+    level_8: 1500
+    level_9: 2000
+    level_10: 3500
+    level_11: 5000
+    level_12: 7500
+    level_13: 10000
+    level_14: 15000
+    level_15: 20000
+    level_16: 30000
+    level_17: 50000
+    level_18: 75000
+    level_19: 100000
+    level_20: 200000
+    level_21: 300000
+    level_22: 400000
+    level_23: 500000
+    level_24: 600000
+    level_25: 700000
+    level_26: 800000
+    level_27: 900000
+    level_28: 1000000
+    level_29: 1100000
+    level_30: 1200000
+    level_31: 1300000
+    level_32: 1400000
+    level_33: 1500000
+    level_34: 1600000
+    level_35: 1700000
+    level_36: 1800000
+    level_37: 1900000
+    level_38: 2000000
+    level_39: 2100000
+    level_40: 2200000
+    level_41: 2300000
+    level_42: 2400000
+    level_43: 2500000
+    level_44: 2600000
+    level_45: 2750000
+    level_46: 2900000
+    level_47: 3100000
+    level_48: 3400000
+    level_49: 3700000
+    level_50: 4000000
