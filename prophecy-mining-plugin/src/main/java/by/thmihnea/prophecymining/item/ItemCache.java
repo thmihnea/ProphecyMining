@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Getter
 public class ItemCache {
@@ -22,16 +23,22 @@ public class ItemCache {
         this.init();
     }
 
+    public static List<Drop> getDrops() {
+        return drops;
+    }
+
     private void init() {
         Objects.requireNonNull(ProphecyMining.getCfg().getConfigurationSection("drops")).getKeys(false).forEach(key -> {
             String materialName = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("drops." + key + ".material")));
             String displayName = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("drops." + key + ".name")));
             int chance = ProphecyMining.getCfg().getInt("drops." + key + ".chance");
+            int buyPrice = ProphecyMining.getCfg().getInt("drops." + key + ".buy_price");
+            int sellPrice = ProphecyMining.getCfg().getInt("drops." + key + ".sell_price");
             List<String> lore = LangUtil.translateLoreColorCodes(ProphecyMining.getCfg().getStringList("drops." + key + ".lore"));
 
             Material material = Material.valueOf(materialName);
 
-            Drop drop = new Drop(material, displayName, chance, lore);
+            Drop drop = new Drop(material, displayName, chance, lore, buyPrice, sellPrice);
             drops.add(drop);
         });
     }
@@ -43,6 +50,17 @@ public class ItemCache {
         int chance = drop.getChance();
         int hash = ThreadLocalRandom.current().nextInt(100);
         return (hash <= chance) ? drop.getItemStack() : null;
+    }
+
+    public static Drop getFromItemStack(ItemStack itemStack) {
+        if (!(itemStack.hasItemMeta())) return null;
+        String displayName = Objects.requireNonNull(itemStack.getItemMeta()).getDisplayName();
+        AtomicReference<Drop> atomicDrop = new AtomicReference<>(null);
+        drops.forEach(drop -> {
+            if (drop.getItemStack().getItemMeta().getDisplayName().equals(displayName))
+                atomicDrop.set(drop);
+        });
+        return atomicDrop.get();
     }
 
 }

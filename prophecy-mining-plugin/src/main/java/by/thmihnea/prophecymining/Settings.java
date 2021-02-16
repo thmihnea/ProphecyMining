@@ -56,6 +56,13 @@ public class Settings {
     public static final String LANG_NO_PERMISSION = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.no_permission")));
     public static final String LANG_COMMAND_NOT_EXISTS = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.command_not_found")));
     public static final String LANG_ACTIONBAR_MESSAGE = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.actionbar")));
+    public static final String LANG_RARE_ITEM_SHOP_TITLE = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.rareitemshop_title")));
+    public static final String LANG_BUY_TEXT = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.buy_text")));
+    public static final String LANG_SELL_TEXT = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.sell_text")));
+    public static final String LANG_NOT_ENOUGH_COINS = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.not_enough_coins")));
+    public static final String LANG_BUY_MESSAGE = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.buy_message")));
+    public static final String LANG_NOT_ENOUGH_ITEMS = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.not_enough_items")));
+    public static final String LANG_SELL_MESSAGE = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.sell_message")));
 
     /**
      * Runnable utils.

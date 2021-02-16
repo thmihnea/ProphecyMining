@@ -6,6 +6,11 @@ name: ProphecyMining
 
 api-version: 1.13
 
+depend:
+  - SmartInvs
+
 commands:
   coins:
     description: Coins manipulation command for Prophecy Skyblock.
+  rareitemshop:
+    description: Opens up the Rare Item shop menu.

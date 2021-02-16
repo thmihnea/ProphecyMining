@@ -34,6 +34,13 @@ lang:
   no_permission: "&cYou don't have sufficient permissions to run this command!"
   rare_drop: "&6&lRARE DROP! &eYou've received a: %dropName%"
   rare_drop_coins: "&a&lDROP! &eYou've received %amount% Coins!"
+  rareitemshop_title: "&6&lRARE ITEM SHOP"
+  buy_text: "&6* &fBuy for: &e%price%"
+  sell_text: "&6* &fSell for: &e%price%"
+  buy_message: "&6&lSHOP - &fYou have bought &e%amount%x&r %itemName%(s) &ffor &e%price%&f."
+  sell_message: "&6&lSHOP - &fYou have sold &e%amount%x&r %itemName%(s) &ffor &e%price%&f."
+  not_enough_coins: "&cYou don't have enough coins to perform this transaction!"
+  not_enough_items: "&cYou don't have any items of this type in your inventory!"
 
 xp:
   coal:
@@ -68,18 +75,24 @@ drops:
     name: "&5Amethyst"
     material: "DIAMOND"
     chance: 10
+    buy_price: 1500
+    sell_price: 1000
     lore:
       - "&7This is an Amethyst!"
   ruby:
     name: "&cRuby"
     chance: 5
     material: "REDSTONE"
+    buy_price: 1250
+    sell_price: 750
     lore:
       - "&7This is a Ruby!"
   gemstone:
     name: "&aGemstone"
     chance: 3
     material: "EMERALD"
+    buy_price: 1000
+    sell_price: 500
     lore:
       - "&7This is an Emerald!"
 

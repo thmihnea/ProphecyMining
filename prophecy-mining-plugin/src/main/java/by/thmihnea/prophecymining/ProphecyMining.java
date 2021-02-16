@@ -6,6 +6,7 @@ import by.thmihnea.prophecymining.listener.BlockBreakListener;
 import by.thmihnea.prophecymining.listener.PlayerJoinListener;
 import by.thmihnea.prophecymining.listener.PlayerQuitListener;
 import by.thmihnea.prophecymining.util.SQLUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.Listener;
 
@@ -35,6 +36,7 @@ public class ProphecyMining extends AbstractPlugin {
     @Override
     protected void start() {
         this.logInfo("Attempting to enable plugin modules.");
+        this.checkDepend();
         this.setupTime();
         this.setupInstance();
         this.setupFiles();
@@ -76,5 +78,13 @@ public class ProphecyMining extends AbstractPlugin {
 
     private long getTimeEnabled() {
         return System.currentTimeMillis() - this.TIME_ENABLED;
+    }
+
+    private void checkDepend() {
+        this.logInfo("Checking dependencies...");
+        if (!(Bukkit.getPluginManager().isPluginEnabled("SmartInvs"))) {
+            this.logSevere("SmartInvs dependency was not found! Disabling ProphecyMining.");
+            this.setEnabled(false);
+        }
     }
 }

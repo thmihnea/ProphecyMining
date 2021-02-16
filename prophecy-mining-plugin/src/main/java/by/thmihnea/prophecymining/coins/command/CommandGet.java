@@ -4,6 +4,7 @@ import by.thmihnea.prophecymining.ProphecyMining;
 import by.thmihnea.prophecymining.Settings;
 import by.thmihnea.prophecymining.command.AbstractCommand;
 import by.thmihnea.prophecymining.data.TableType;
+import by.thmihnea.prophecymining.util.LangUtil;
 import by.thmihnea.prophecymining.util.SQLUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -36,7 +37,7 @@ public class CommandGet extends AbstractCommand {
         int coins = sqlUtil.getValue(TableType.PLAYER_COINS, "COINS", uniqueId);
         String message = Settings.LANG_DISPLAY_PLAYER_COINS;
         if (message.contains("%player%")) message = message.replace("%player%", offlinePlayer.getName());
-        if (message.contains("%amount%")) message = message.replace("%amount%", String.valueOf(coins));
+        if (message.contains("%amount%")) message = message.replace("%amount%", LangUtil.formatNumber(coins));
         this.sendMessage(message);
     }
 }

@@ -2,6 +2,7 @@ package by.thmihnea.prophecymining.bootstrap;
 
 import by.thmihnea.prophecymining.Settings;
 import by.thmihnea.prophecymining.coins.CoinsCommandHandler;
+import by.thmihnea.prophecymining.command.shop.RareItemShopCommand;
 import by.thmihnea.prophecymining.data.SQLConnection;
 import by.thmihnea.prophecymining.item.ItemCache;
 import lombok.Getter;
@@ -12,6 +13,7 @@ public class Bootstrapper {
     private SQLConnection sqlConnection;
     private ItemCache itemCache;
     private CoinsCommandHandler coinsCommandHandler;
+    private RareItemShopCommand rareItemShopCommand;
 
     public Bootstrapper() {
         this.init();
@@ -25,6 +27,7 @@ public class Bootstrapper {
                 Settings.SQL_PASSWORD);
         this.itemCache = new ItemCache();
         this.coinsCommandHandler = new CoinsCommandHandler();
+        this.rareItemShopCommand = new RareItemShopCommand();
     }
 
 }
