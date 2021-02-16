@@ -2,6 +2,7 @@ package by.thmihnea.prophecymining;
 
 import by.thmihnea.prophecymining.block.BlockExperience;
 import by.thmihnea.prophecymining.bootstrap.Bootstrapper;
+import by.thmihnea.prophecymining.cache.MiningPlayer;
 import by.thmihnea.prophecymining.listener.BlockBreakListener;
 import by.thmihnea.prophecymining.listener.PlayerJoinListener;
 import by.thmihnea.prophecymining.listener.PlayerQuitListener;
@@ -44,6 +45,7 @@ public class ProphecyMining extends AbstractPlugin {
         this.bootstrapper = new Bootstrapper();
         this.sqlUtil = new SQLUtil(this.bootstrapper.getSqlConnection());
         this.sqlUtil.setupDefaults();
+        this.setupObjects();
         this.logInfo("Plugin successfully enabled. Process took: " + this.getTimeEnabled() + "ms");
     }
 
@@ -79,6 +81,8 @@ public class ProphecyMining extends AbstractPlugin {
     private long getTimeEnabled() {
         return System.currentTimeMillis() - this.TIME_ENABLED;
     }
+
+    private void setupObjects() { Bukkit.getOnlinePlayers().forEach(MiningPlayer::new); }
 
     private void checkDepend() {
         this.logInfo("Checking dependencies...");
