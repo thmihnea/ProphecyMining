@@ -7,6 +7,7 @@ import lombok.Setter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 @Getter
 @Setter
@@ -30,6 +31,10 @@ public class SQLConnection {
         try {
             synchronized (this) {
                 if (this.getConnection() != null && !(this.getConnection().isClosed())) return;
+                this.setConnection(DriverManager.getConnection("jdbc:mysql://" + this.host + ":" + this.port + "/", this.username, this.password));
+                Statement statement = this.getConnection().createStatement();
+                String query = "CREATE DATABASE IF NOT EXISTS " + this.getDatabase();
+                statement.executeUpdate(query);
                 this.setConnection(DriverManager.getConnection("jdbc:mysql://" + this.host + ":" + this.port + "/" + this.database, this.username, this.password));
             }
             ProphecyMining.getInstance().logInfo("Successfully established a connection to the database.");

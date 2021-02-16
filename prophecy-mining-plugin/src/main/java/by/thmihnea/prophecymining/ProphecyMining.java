@@ -1,6 +1,5 @@
 package by.thmihnea.prophecymining;
 
-import by.thmihnea.prophecymining.block.BlockExperience;
 import by.thmihnea.prophecymining.bootstrap.Bootstrapper;
 import by.thmihnea.prophecymining.cache.MiningPlayer;
 import by.thmihnea.prophecymining.listener.BlockBreakListener;
@@ -8,7 +7,6 @@ import by.thmihnea.prophecymining.listener.PlayerJoinListener;
 import by.thmihnea.prophecymining.listener.PlayerQuitListener;
 import by.thmihnea.prophecymining.util.SQLUtil;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.event.Listener;
 
 import java.util.Arrays;

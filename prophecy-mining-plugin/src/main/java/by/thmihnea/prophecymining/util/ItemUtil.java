@@ -20,6 +20,8 @@ public class ItemUtil {
         assert itemMeta != null;
 
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_DYE);
+        itemMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', displayName));
         itemMeta.setLore(lore);
 
