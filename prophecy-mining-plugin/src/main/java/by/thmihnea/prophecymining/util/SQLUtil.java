@@ -60,7 +60,11 @@ public class SQLUtil {
                             "REDSTONE_MINED bigint(255), DIAMOND_MINED bigint(255))");
             PreparedStatement preparedStatement2 = this.getSqlConnection()
                     .getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS `player_levels` (UUID varchar(256), LEVEL int(255), CURRENT_XP bigint(255), XP_TO_NEXT_LEVEL bigint(255))");
-            List<PreparedStatement> statements = Arrays.asList(preparedStatement1, preparedStatement2); // in case I ever add more
+            PreparedStatement preparedStatement3 = this.getSqlConnection()
+                    .getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS `player_coins` (UUID varchar(256), COINS int(255))");
+            List<PreparedStatement> statements = Arrays.asList(preparedStatement1,
+                    preparedStatement2,
+                    preparedStatement3); // in case I ever add more
             statements.forEach(statement -> {
                 try {
                     statement.executeUpdate();
@@ -77,8 +81,10 @@ public class SQLUtil {
         try {
             PreparedStatement preparedStatement1 = this.getInitializationStatement(player);
             PreparedStatement preparedStatement2 = this.getXpInitializationStatement(player);
+            PreparedStatement preparedStatement3 = this.getCoinsInitializationStatement(player);
             preparedStatement1.execute();
             preparedStatement2.execute();
+            preparedStatement3.execute();
             ProphecyMining.getInstance().logInfo("Successfully added player " + player.getName() + " to our database records.");
         } catch (SQLException throwable) {
             throwable.printStackTrace();
@@ -95,6 +101,14 @@ public class SQLUtil {
         for (int i = 1; i <= 7; i++) {
             preparedStatement.setInt(i + 1, 0);
         }
+        return preparedStatement;
+    }
+
+    protected PreparedStatement getCoinsInitializationStatement(Player player) throws SQLException {
+        PreparedStatement preparedStatement = this.getSqlConnection()
+                .getConnection().prepareStatement("INSERT INTO `player_coins` (UUID, COINS) VALUE (?, ?)");
+        preparedStatement.setString(1, player.getUniqueId().toString());
+        preparedStatement.setInt(2, 0);
         return preparedStatement;
     }
 

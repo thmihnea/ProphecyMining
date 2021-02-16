@@ -15,6 +15,25 @@ lang:
     - "&eto level %level%!"
     - ""
     - "&8&m----------------------------"
+  actionbar: "&3+%amount% XP (%current%/%total%)"
+  coins_help_message:
+    - "&eThe following commands are available:"
+    - "&8/&ecoins get <player>"
+    - "&8/&ecoins set <player> <amount>"
+    - "&8/&ecoins add <player> <amount>"
+    - "&8/&ecoins take <player> <amount>"
+  coins_specify_player: "&cYou need to specify a player to perform a lookup for!"
+  coins_specify_amount: "&cYou need to specify an amount of coins!"
+  coins_specify_valid_amount: "&cYou need to specify a &nVALID&r&c amount of coins! (NUMBERS)"
+  target_does_not_exist: "&cThis player does not exist!"
+  display_coins: "&e%player% has %amount% coins."
+  add_coins: "&eYou have added %amount% coins to %player%'s balance!"
+  remove_coins: "&eYou have removed %amount% coins from %player%'s balance!"
+  set_coins: "&eYou have set %player%'s coins to: %amount%"
+  command_not_found: "&cThis command doesn't exist! Please try again."
+  no_permission: "&cYou don't have sufficient permissions to run this command!"
+  rare_drop: "&6&lRARE DROP! &eYou've received a: %dropName%"
+  rare_drop_coins: "&a&lDROP! &eYou've received %amount% Coins!"
 
 xp:
   coal:
@@ -38,6 +57,11 @@ xp:
   diamond:
     start: 16
     end: 32
+
+coins:
+  drop_chance: 10
+  lower_bound: 5
+  upper_bound: 25
 
 drops:
   amethyst:

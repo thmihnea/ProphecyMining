@@ -5,3 +5,7 @@ description: Mining plugin made for ProphecySB
 name: ProphecyMining
 
 api-version: 1.13
+
+commands:
+  coins:
+    description: Coins manipulation command for Prophecy Skyblock.

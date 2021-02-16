@@ -6,7 +6,8 @@ import lombok.Getter;
 public enum TableType {
 
     PLAYER_DATA("player_data"),
-    PLAYER_LEVELS("player_levels");
+    PLAYER_LEVELS("player_levels"),
+    PLAYER_COINS("player_coins");
 
     private final String name;
 

@@ -1,12 +1,16 @@
 package by.thmihnea.prophecymining.util;
 
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LangUtil {
+
+    private static DecimalFormat format = new DecimalFormat("###,###,###");
 
     public static List<String> translateLoreColorCodes(List<String> lore) {
         return lore.stream().map(string -> ChatColor.translateAlternateColorCodes('&', string)).collect(Collectors.toList());
@@ -22,5 +26,11 @@ public class LangUtil {
 
     public static void sendStringList(Player player, List<String> list) {
         list.forEach(player::sendMessage);
+    }
+
+    public static void sendStringList(CommandSender commandSender, List<String> list) { list.forEach(commandSender::sendMessage); }
+
+    public static String formatNumber(int number) {
+        return format.format(number);
     }
 }
