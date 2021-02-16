@@ -2,6 +2,7 @@ package by.thmihnea.prophecymining.util;
 
 import by.thmihnea.prophecymining.Settings;
 import by.thmihnea.prophecymining.item.Drop;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
@@ -19,7 +20,7 @@ public class ItemUtil {
         assert itemMeta != null;
 
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        itemMeta.setDisplayName(displayName);
+        itemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', displayName));
         itemMeta.setLore(lore);
 
         itemStack.setItemMeta(itemMeta);
@@ -56,6 +57,10 @@ public class ItemUtil {
             return;
         }
         for (int i = 1; i <= amount; i++) {
+            if (player.getInventory().firstEmpty() == -1) {
+                player.getWorld().dropItemNaturally(player.getLocation(), new ItemStack(drop.getItemStack()));
+                continue;
+            }
             player.getInventory().addItem(new ItemStack(drop.getItemStack()));
         }
         CoinsUtil.takeCoins(player.getUniqueId().toString(), finalPrice);

@@ -24,6 +24,22 @@ public class LangUtil {
         return lore.stream().map(string -> string.replace("%level%", String.valueOf(level))).collect(Collectors.toList());
     }
 
+    public static List<String> applyAmountPlaceholder(int amount, List<String> lore) {
+        return lore.stream().map(string -> string.replace("%amount%", String.valueOf(amount))).collect(Collectors.toList());
+    }
+
+    public static List<String> applyItemNamePlaceholder(String itemName, List<String> lore) {
+        return lore.stream().map(string -> string.replace("%itemName%", itemName)).collect(Collectors.toList());
+    }
+
+    public static List<String> applyPricePlaceholder(int price, List<String> lore) {
+        return lore.stream().map(string -> string.replace("%price%", String.valueOf(price))).collect(Collectors.toList());
+    }
+
+    public static List<String> applyPricePlaceholder(String price, List<String> lore) {
+        return lore.stream().map(string -> string.replace("%price%", String.valueOf(price))).collect(Collectors.toList());
+    }
+
     public static void sendStringList(Player player, List<String> list) {
         list.forEach(player::sendMessage);
     }

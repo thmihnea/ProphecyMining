@@ -43,6 +43,12 @@ public class Settings {
      */
     public static final List<String> LANG_LEVELUP_MESSAGE = LangUtil.translateLoreColorCodes(ProphecyMining.getCfg().getStringList("lang.levelup_message"));
     public static final List<String> LANG_COINS_HELP_MESSAGE = LangUtil.translateLoreColorCodes(ProphecyMining.getCfg().getStringList("lang.coins_help_message"));
+    public static final List<String> LANG_SHOP_ITEM_BUY_LORE = LangUtil.translateLoreColorCodes(ProphecyMining.getCfg().getStringList("lang.shop_item_buy_lore"));
+    public static final List<String> LANG_SHOP_ITEM_SELL_LORE = LangUtil.translateLoreColorCodes(ProphecyMining.getCfg().getStringList("lang.shop_item_sell_lore"));
+    public static final String LANG_NO_MATCH = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.no_match")));
+    public static final String LANG_CLOSE_MENU = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.close_menu")));
+    public static final String LANG_ITEM_BUY_NAME = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.shop_item_buy_name")));
+    public static final String LANG_ITEM_SELL_NAME = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.shop_item_sell_name")));
     public static final String LANG_RARE_DROP_COINS = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.rare_drop_coins")));
     public static final String LANG_RARE_DROP = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.rare_drop")));
     public static final String LANG_DISPLAY_PLAYER_COINS = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.display_coins")));

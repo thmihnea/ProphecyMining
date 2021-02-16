@@ -1,6 +1,8 @@
 package by.thmihnea.prophecymining.item;
 
 import by.thmihnea.prophecymining.ProphecyMining;
+import by.thmihnea.prophecymining.inventory.DropShopCache;
+import by.thmihnea.prophecymining.inventory.DropShopInventoryProvider;
 import by.thmihnea.prophecymining.util.ItemUtil;
 import by.thmihnea.prophecymining.util.LangUtil;
 import lombok.Getter;
@@ -39,6 +41,8 @@ public class ItemCache {
             Material material = Material.valueOf(materialName);
 
             Drop drop = new Drop(material, displayName, chance, lore, buyPrice, sellPrice);
+            DropShopInventoryProvider dropShopInventoryProvider = new DropShopInventoryProvider(drop);
+            DropShopCache.addEntry(drop, dropShopInventoryProvider);
             drops.add(drop);
         });
     }

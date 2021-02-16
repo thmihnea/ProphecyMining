@@ -1,6 +1,7 @@
 package by.thmihnea.prophecymining.inventory;
 
 import by.thmihnea.prophecymining.Settings;
+import by.thmihnea.prophecymining.item.Drop;
 import by.thmihnea.prophecymining.item.ItemCache;
 import by.thmihnea.prophecymining.util.ItemUtil;
 import by.thmihnea.prophecymining.util.LangUtil;
@@ -10,9 +11,6 @@ import fr.minuskube.inv.content.InventoryContents;
 import fr.minuskube.inv.content.InventoryProvider;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -46,7 +44,7 @@ public class RareItemShopInventoryProvider implements InventoryProvider {
             itemStack.setItemMeta(itemMeta);
 
             contents.add(ClickableItem.of(itemStack, e -> {
-                ItemUtil.sellAll(player, drop);
+                DropShopCache.getDropShop(drop).getInventory().open(player);
             }));
         });
     }

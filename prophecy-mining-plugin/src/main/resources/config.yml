@@ -22,6 +22,20 @@ lang:
     - "&8/&ecoins set <player> <amount>"
     - "&8/&ecoins add <player> <amount>"
     - "&8/&ecoins take <player> <amount>"
+  shop_item_sell_name: "&6* &fSell &e%amount% &fof %itemName%"
+  shop_item_buy_name: "&6* &fBuy &e%amount% &fof %itemName%"
+  shop_item_buy_lore:
+    - ""
+    - "&fBy &6Right-Clicking &fon this item"
+    - "&fyou will attempt purchasing &ex%amount% &fof"
+    - "%itemName%&f."
+    - ""
+    - "&6* Price: &e%price%"
+  shop_item_sell_lore:
+    - ""
+    - "&fBy &6Right-Clicking on this item"
+    - "&fyou will sell &ex%amount% &fof"
+    - "%itemName% &ffor &e%price%&f."
   coins_specify_player: "&cYou need to specify a player to perform a lookup for!"
   coins_specify_amount: "&cYou need to specify an amount of coins!"
   coins_specify_valid_amount: "&cYou need to specify a &nVALID&r&c amount of coins! (NUMBERS)"
@@ -41,6 +55,8 @@ lang:
   sell_message: "&6&lSHOP - &fYou have sold &e%amount%x&r %itemName%(s) &ffor &e%price%&f."
   not_enough_coins: "&cYou don't have enough coins to perform this transaction!"
   not_enough_items: "&cYou don't have any items of this type in your inventory!"
+  close_menu: "&cGo Back"
+  no_match: "&c(No items matching found!)"
 
 xp:
   coal:
