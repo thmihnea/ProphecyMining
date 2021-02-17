@@ -37,6 +37,7 @@ public class Settings {
     public static final int COINS_DROP_CHANCE = ProphecyMining.getCfg().getInt("coins.drop_chance");
     public static final int COINS_LOWER = ProphecyMining.getCfg().getInt("coins.lower_bound");
     public static final int COINS_UPPER = ProphecyMining.getCfg().getInt("coins.upper_bound");
+    public static final int LUCK_BONUS_CHANCE_PER_LEVEL = ProphecyMining.getCfg().getInt("enchantments.luck_bonus_chance_per_level");
     public static final int ENCHANTMENT_AUTOPICKUP_PRICE = ProphecyMining.getCfg().getInt("enchantments.autopickup.price");
     public static final int ENCHANTMENT_AUTOSELL_PRICE = ProphecyMining.getCfg().getInt("enchantments.autosell.price");
     public static final int ENCHANTMENT_LUCK_PRICE = ProphecyMining.getCfg().getInt("enchantments.luck.price");
@@ -85,6 +86,7 @@ public class Settings {
     public static final String LANG_MAX_LEVEL = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.max_level")));
     public static final String LANG_ENCHANTMENTS_BUY = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("enchantments.buy")));
     public static final String LANG_ENCHANTMENTS_NAME = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("enchantments.name")));
+    public static final String LANG_NOT_ENOUGH_MONEY = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.not_enough_money")));
 
     /**
      * Runnable utils.

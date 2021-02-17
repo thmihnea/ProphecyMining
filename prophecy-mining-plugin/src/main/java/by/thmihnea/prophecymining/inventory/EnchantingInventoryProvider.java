@@ -4,6 +4,7 @@ import by.thmihnea.prophecymining.ProphecyMining;
 import by.thmihnea.prophecymining.Settings;
 import by.thmihnea.prophecymining.enchantment.EnchantmentCache;
 import by.thmihnea.prophecymining.enchantment.EnchantmentManager;
+import by.thmihnea.prophecymining.util.CoinsUtil;
 import by.thmihnea.prophecymining.util.EnchantUtil;
 import by.thmihnea.prophecymining.util.ItemUtil;
 import by.thmihnea.prophecymining.util.LangUtil;
@@ -11,6 +12,7 @@ import fr.minuskube.inv.ClickableItem;
 import fr.minuskube.inv.SmartInventory;
 import fr.minuskube.inv.content.InventoryContents;
 import fr.minuskube.inv.content.InventoryProvider;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -51,18 +53,24 @@ public class EnchantingInventoryProvider implements InventoryProvider {
 
             String key = enchantment.getKey().getKey();
             String name = EnchantUtil.getEnchantName(finalEnchantment.getName());
+
             List<String> enchantLore = LangUtil.translateLoreColorCodes(ProphecyMining.getCfg().getStringList("enchantments." + key + ".lore"));
             int price = ProphecyMining.getCfg().getInt("enchantments." + key + ".price");
             String buy = Settings.LANG_ENCHANTMENTS_BUY.replace("%price%", LangUtil.formatNumber(price));
             enchantLore.add(buy);
+
             String displayName = Settings.LANG_ENCHANTMENTS_NAME.replace("%enchantName%", name);
 
+            if (CoinsUtil.getCoins(player.getUniqueId().toString()) < price) {
+                enchantLore.add(Settings.LANG_NOT_ENOUGH_MONEY);
+            }
+
             ItemStack book = ItemUtil.getItemStack(Material.ENCHANTED_BOOK, displayName, enchantLore);
+
             contents.add(ClickableItem.of(book, e -> {
                 EnchantUtil.applyEnchantment(player, this.itemStack, price, finalEnchantment);
                 ItemUtil.patchLore(this.itemStack);
-                //System.out.println(finalEnchantment.getName() + " | " + this.itemStack.getEnchantmentLevel(finalEnchantment));
-                //System.out.println(enchantment.getName() + " | " + this.itemStack.getEnchantmentLevel(enchantment));
+                this.open(player);
             }));
         });
     }

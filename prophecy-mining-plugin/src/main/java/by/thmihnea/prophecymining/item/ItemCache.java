@@ -56,6 +56,15 @@ public class ItemCache {
         return (hash <= chance) ? drop.getItemStack() : null;
     }
 
+    public static ItemStack computeDrop(int additionalChance) {
+        if (drops.size() == 0) return null;
+        int i = ThreadLocalRandom.current().nextInt(drops.size());
+        Drop drop = drops.get(i);
+        int chance = drop.getChance() + additionalChance;
+        int hash = ThreadLocalRandom.current().nextInt(100);
+        return (hash <= chance) ? drop.getItemStack() : null;
+    }
+
     public static Drop getFromItemStack(ItemStack itemStack) {
         if (!(itemStack.hasItemMeta())) return null;
         String displayName = Objects.requireNonNull(itemStack.getItemMeta()).getDisplayName();
@@ -65,6 +74,10 @@ public class ItemCache {
                 atomicDrop.set(drop);
         });
         return atomicDrop.get();
+    }
+
+    public static boolean isRareDrop(ItemStack itemStack) {
+        return getFromItemStack(itemStack) != null;
     }
 
 }

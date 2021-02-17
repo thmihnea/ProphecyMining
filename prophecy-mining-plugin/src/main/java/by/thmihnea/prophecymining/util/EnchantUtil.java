@@ -5,6 +5,8 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class EnchantUtil {
 
     public static boolean canEnchant(Enchantment enchantment, ItemStack itemStack) {
@@ -30,6 +32,23 @@ public class EnchantUtil {
         int level = 0;
         if (itemStack.getEnchantments().containsKey(enchantment)) level = itemStack.getEnchantments().get(enchantment);
         itemStack.addUnsafeEnchantment(enchantment, level + 1);
+    }
+
+    public static Enchantment getEnchantmentByKey(ItemStack itemStack, String key) {
+        for (Enchantment enchantment : itemStack.getEnchantments().keySet()) {
+            if (enchantment.getKey().getKey().equals(key))
+                return enchantment;
+        }
+        return null;
+    }
+
+    public static boolean containsEnchant(ItemStack itemStack, String key) {
+        AtomicBoolean contains = new AtomicBoolean(false);
+        itemStack.getEnchantments().keySet().forEach(enchantment -> {
+            if (enchantment.getKey().getKey().equals(key))
+                contains.set(true);
+        });
+        return contains.get();
     }
 
     public static String getEnchantName(String arg) {

@@ -86,7 +86,7 @@ public class DropShopInventoryProvider implements InventoryProvider {
         lore = LangUtil.applyAmountPlaceholder(this.getBuyAmount(player), lore);
         lore = LangUtil.applyItemNamePlaceholder(this.drop.getItemStack().getItemMeta().getDisplayName(), lore);
         String price;
-        if (this.drop.getBuyPrice() * this.getBuyAmount(player) == 0) price = ChatColor.translateAlternateColorCodes('&', "&cNOT ENOUGH MONEY");
+        if (this.drop.getBuyPrice() * this.getBuyAmount(player) == 0) price = Settings.LANG_NOT_ENOUGH_MONEY;
         else price = String.valueOf(this.drop.getBuyPrice() * this.getBuyAmount(player));
         lore = LangUtil.applyPricePlaceholder(price, lore);
         return lore;

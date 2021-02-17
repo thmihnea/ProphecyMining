@@ -64,8 +64,10 @@ lang:
   enchantment_shop_title: "&6&lENCHANTMENT SHOP"
   require_hold_pickaxe: "&cYou have to hold a pickaxe in order to access the Enchanting Menu!"
   max_level: "&cYou have already applied this Enchantment up to the maximum level!"
+  not_enough_money: "&cNOT ENOUGH MONEY"
 
 enchantments:
+  luck_bonus_chance_per_level: 5
   name: "&6%enchantName%"
   buy: "&fApply this enchantment for &6%price%&f!"
   autopickup:

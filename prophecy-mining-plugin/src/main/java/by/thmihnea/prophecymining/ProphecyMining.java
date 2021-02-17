@@ -4,6 +4,7 @@ import by.thmihnea.prophecymining.bootstrap.Bootstrapper;
 import by.thmihnea.prophecymining.cache.MiningPlayer;
 import by.thmihnea.prophecymining.enchantment.EnchantmentManager;
 import by.thmihnea.prophecymining.enchantment.EnchantmentWrapper;
+import by.thmihnea.prophecymining.enchantment.listener.AutoPickup;
 import by.thmihnea.prophecymining.listener.BlockBreakListener;
 import by.thmihnea.prophecymining.listener.PlayerJoinListener;
 import by.thmihnea.prophecymining.listener.PlayerQuitListener;
@@ -27,7 +28,8 @@ public class ProphecyMining extends AbstractPlugin {
     private final List<Listener> listenerList = Arrays.asList(
             new PlayerJoinListener(),
             new PlayerQuitListener(),
-            new BlockBreakListener()
+            new BlockBreakListener(),
+            new AutoPickup()
     );
 
     /**
@@ -90,6 +92,14 @@ public class ProphecyMining extends AbstractPlugin {
         this.logInfo("Checking dependencies...");
         if (!(Bukkit.getPluginManager().isPluginEnabled("SmartInvs"))) {
             this.logSevere("SmartInvs dependency was not found! Disabling ProphecyMining.");
+            this.setEnabled(false);
+        }
+        else if (!(Bukkit.getPluginManager().isPluginEnabled("Vault"))) {
+            this.logSevere("Vault dependency was not found! Disabling ProphecyMining.");
+            this.setEnabled(false);
+        }
+        else if (!(Bukkit.getPluginManager().isPluginEnabled("ShopGUIPlus"))) {
+            this.logSevere("ShopGUI+ dependency was not found! Disabling ProphecyMining.");
             this.setEnabled(false);
         }
     }

@@ -1,5 +1,6 @@
 package by.thmihnea.prophecymining.bootstrap;
 
+import by.thmihnea.prophecymining.ProphecyMining;
 import by.thmihnea.prophecymining.Settings;
 import by.thmihnea.prophecymining.coins.CoinsCommandHandler;
 import by.thmihnea.prophecymining.command.EnchanterCommand;
@@ -7,6 +8,8 @@ import by.thmihnea.prophecymining.command.RareItemShopCommand;
 import by.thmihnea.prophecymining.data.SQLConnection;
 import by.thmihnea.prophecymining.item.ItemCache;
 import lombok.Getter;
+import net.milkbowl.vault.economy.Economy;
+import org.bukkit.plugin.RegisteredServiceProvider;
 
 @Getter
 public class Bootstrapper {
@@ -16,6 +19,7 @@ public class Bootstrapper {
     private CoinsCommandHandler coinsCommandHandler;
     private RareItemShopCommand rareItemShopCommand;
     private EnchanterCommand enchanterCommand;
+    private Economy economy;
 
     public Bootstrapper() {
         this.init();
@@ -31,6 +35,21 @@ public class Bootstrapper {
         this.coinsCommandHandler = new CoinsCommandHandler();
         this.rareItemShopCommand = new RareItemShopCommand();
         this.enchanterCommand = new EnchanterCommand();
+        if (!(this.setupEconomy())) {
+            ProphecyMining.getInstance().logSevere("Vault API was not loaded! Please double-check everything!");
+        }
+    }
+
+    private boolean setupEconomy() {
+        if (ProphecyMining.getInstance().getServer().getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        RegisteredServiceProvider<Economy> rsp = ProphecyMining.getInstance().getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            return false;
+        }
+        this.economy = rsp.getProvider();
+        return this.economy != null;
     }
 
 }
