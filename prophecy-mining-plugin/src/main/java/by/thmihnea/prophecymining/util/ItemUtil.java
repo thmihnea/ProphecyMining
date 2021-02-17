@@ -5,6 +5,7 @@ import by.thmihnea.prophecymining.enchantment.EnchantmentCache;
 import by.thmihnea.prophecymining.item.Drop;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -52,14 +53,19 @@ public class ItemUtil {
                 .replace("%itemName%", itemStack.getItemMeta().getDisplayName())
                 .replace("%price%", LangUtil.formatNumber(price));
         player.sendMessage(message);
+        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 1.0f, 1.0f);
     }
 
     public static void buyAll(Player player, Drop drop) {
+        if (player.getInventory().firstEmpty() == -1) {
+            player.sendMessage(Settings.LANG_INVENTORY_FULL);
+            return;
+        }
         int price = drop.getBuyPrice();
         int coins = CoinsUtil.getCoins(player.getUniqueId().toString());
-        int amount = coins / price;
+        int amount = 64;
         int finalPrice = price * amount;
-        if (amount == 0) {
+        if (coins < finalPrice) {
             String message = Settings.LANG_NOT_ENOUGH_COINS;
             player.sendMessage(message);
             return;
@@ -77,6 +83,7 @@ public class ItemUtil {
                 .replace("%itemName%", drop.getItemStack().getItemMeta().getDisplayName())
                 .replace("%price%", LangUtil.formatNumber(finalPrice));
         player.sendMessage(message);
+        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 1.0f, 1.0f);
     }
 
     public static void sellAll(Player player, Drop drop) {
@@ -103,6 +110,7 @@ public class ItemUtil {
                 .replace("%itemName%", dropStack.getItemMeta().getDisplayName())
                 .replace("%price%", LangUtil.formatNumber(coinsToAdd));
         player.sendMessage(message);
+        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 1.0f, 1.0f);
     }
 
     public static void sellOne(Player player, Drop drop) {
@@ -128,6 +136,7 @@ public class ItemUtil {
             player.sendMessage(message);
         } else {
             player.sendMessage(Settings.LANG_NOT_ENOUGH_ITEMS);
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 1.0f, 1.0f);
         }
     }
 

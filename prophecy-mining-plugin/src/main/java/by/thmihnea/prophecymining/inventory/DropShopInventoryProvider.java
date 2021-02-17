@@ -83,11 +83,10 @@ public class DropShopInventoryProvider implements InventoryProvider {
 
     private List<String> getBuyLoreForAll(Player player) {
         List<String> lore = new ArrayList<>(Settings.LANG_SHOP_ITEM_BUY_LORE);
-        lore = LangUtil.applyAmountPlaceholder(this.getBuyAmount(player), lore);
+        lore = LangUtil.applyAmountPlaceholder(64, lore);
         lore = LangUtil.applyItemNamePlaceholder(this.drop.getItemStack().getItemMeta().getDisplayName(), lore);
-        String price;
-        if (this.drop.getBuyPrice() * this.getBuyAmount(player) == 0) price = Settings.LANG_NOT_ENOUGH_MONEY;
-        else price = String.valueOf(this.drop.getBuyPrice() * this.getBuyAmount(player));
+        String price = String.valueOf(this.drop.getBuyPrice() * 64);
+        if (this.drop.getBuyPrice() * 64 > CoinsUtil.getCoins(player.getUniqueId().toString())) lore.add(Settings.LANG_NOT_ENOUGH_MONEY);
         lore = LangUtil.applyPricePlaceholder(price, lore);
         return lore;
     }
@@ -112,7 +111,7 @@ public class DropShopInventoryProvider implements InventoryProvider {
         ItemStack itemStack = new ItemStack(stackType);
         ItemMeta itemMeta = itemStack.getItemMeta();
         String displayName = Settings.LANG_ITEM_BUY_NAME;
-        displayName = displayName.replace("%amount%", String.valueOf(this.getBuyAmount(player)))
+        displayName = displayName.replace("%amount%", String.valueOf(64))
                 .replace("%itemName%", this.drop.getItemStack().getItemMeta().getDisplayName());
         itemMeta.setDisplayName(displayName);
         itemMeta.setLore(this.getBuyLoreForAll(player));
