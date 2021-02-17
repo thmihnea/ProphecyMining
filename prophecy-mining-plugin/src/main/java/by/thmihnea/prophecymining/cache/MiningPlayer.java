@@ -34,6 +34,7 @@ public class MiningPlayer {
     private int currentXp;
     private int xpToNextLevel;
     private int level;
+    private boolean drill;
 
     public MiningPlayer(Player player) {
         this.sqlUtil = ProphecyMining.getInstance().getSqlUtil();
@@ -47,6 +48,7 @@ public class MiningPlayer {
             this.blocksMined.put(field, blocks);
         });
         this.dataSyncTask = new DataSyncTask(player);
+        this.drill = true;
         MiningPlayerManager.addEntry(this);
     }
 
@@ -73,6 +75,15 @@ public class MiningPlayer {
             this.sqlUtil.setValue(TableType.PLAYER_DATA, field, player.getUniqueId().toString(), this.blocksMined.get(field));
         });
         ProphecyMining.getInstance().logInfo("Uploaded data for player " + this.player.getName() + ". Process took: " + (System.currentTimeMillis() - start) + "ms");
+    }
+
+    public void setUsedDrill(boolean drill) {
+        this.drill = drill;
+        Bukkit.getScheduler().scheduleSyncDelayedTask(ProphecyMining.getInstance(), () -> this.drill = true, 10L);
+    }
+
+    public boolean canUseDrill() {
+        return this.drill;
     }
 
     public void levelUp() {

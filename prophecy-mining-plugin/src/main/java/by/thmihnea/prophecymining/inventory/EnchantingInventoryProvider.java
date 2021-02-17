@@ -2,6 +2,7 @@ package by.thmihnea.prophecymining.inventory;
 
 import by.thmihnea.prophecymining.ProphecyMining;
 import by.thmihnea.prophecymining.Settings;
+import by.thmihnea.prophecymining.cache.InventoryViewerCache;
 import by.thmihnea.prophecymining.enchantment.EnchantmentCache;
 import by.thmihnea.prophecymining.enchantment.EnchantmentManager;
 import by.thmihnea.prophecymining.util.CoinsUtil;
@@ -39,7 +40,7 @@ public class EnchantingInventoryProvider implements InventoryProvider {
             .build();
 
     public void open(Player player) {
-        this.enchantShop.open(player);
+       InventoryViewerCache.addEntry(this.enchantShop.open(player));
     }
 
     @Override

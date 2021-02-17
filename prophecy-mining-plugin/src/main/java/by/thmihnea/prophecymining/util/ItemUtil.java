@@ -70,13 +70,8 @@ public class ItemUtil {
             player.sendMessage(message);
             return;
         }
-        for (int i = 1; i <= amount; i++) {
-            if (player.getInventory().firstEmpty() == -1) {
-                player.getWorld().dropItemNaturally(player.getLocation(), new ItemStack(drop.getItemStack()));
-                continue;
-            }
+        for (int i = 1; i <= amount; i++)
             player.getInventory().addItem(new ItemStack(drop.getItemStack()));
-        }
         CoinsUtil.takeCoins(player.getUniqueId().toString(), finalPrice);
         String message = Settings.LANG_BUY_MESSAGE;
         message = message.replace("%amount%", String.valueOf(amount))

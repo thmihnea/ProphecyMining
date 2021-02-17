@@ -20,7 +20,7 @@ public class CoinsDrop {
         return getRandom(Settings.COINS_LOWER, Settings.COINS_UPPER);
     }
 
-    private static int getRandom(int lower, int upper) {
+    public static int getRandom(int lower, int upper) {
         return (lower + (int) (Math.random() * ((upper - lower) + 1)));
     }
 }
