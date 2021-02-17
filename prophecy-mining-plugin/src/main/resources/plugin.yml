@@ -14,3 +14,5 @@ commands:
     description: Coins manipulation command for Prophecy Skyblock.
   rareitemshop:
     description: Opens up the Rare Item shop menu.
+  enchanter:
+    description: Opens up the Enchanting menu.

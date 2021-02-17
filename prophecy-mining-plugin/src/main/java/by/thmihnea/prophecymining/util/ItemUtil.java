@@ -1,6 +1,7 @@
 package by.thmihnea.prophecymining.util;
 
 import by.thmihnea.prophecymining.Settings;
+import by.thmihnea.prophecymining.enchantment.EnchantmentCache;
 import by.thmihnea.prophecymining.item.Drop;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -9,7 +10,12 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ItemUtil {
 
@@ -123,5 +129,40 @@ public class ItemUtil {
         } else {
             player.sendMessage(Settings.LANG_NOT_ENOUGH_ITEMS);
         }
+    }
+
+    public static List<String> getLoreWithoutEnchants(ItemStack itemStack) {
+        List<String> ret = new ArrayList<>();
+        if (!(itemStack.hasItemMeta())) return Collections.emptyList();
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        if (itemMeta == null) return Collections.emptyList();
+        if (itemMeta.getLore() == null) return Collections.emptyList();
+        for (String string : itemMeta.getLore()) {
+            if (containsEnchantmentName(string)) break;
+            else ret.add(string);
+        }
+        return ret;
+    }
+
+    public static void patchLore(ItemStack itemStack) {
+        List<String> lore = new ArrayList<>(Objects.requireNonNull(getLoreWithoutEnchants(itemStack)));
+        itemStack.getEnchantments().keySet().forEach(enchantment -> {
+            int level = itemStack.getEnchantments().get(enchantment);
+            lore.add(ChatColor.translateAlternateColorCodes('&', "&7" + EnchantUtil.getEnchantName(enchantment.getName()) + " " + level));
+        });
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        assert itemMeta != null;
+        itemMeta.setLore(lore);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        itemStack.setItemMeta(itemMeta);
+    }
+
+    public static boolean containsEnchantmentName(String string) {
+        AtomicBoolean contains = new AtomicBoolean(false);
+        EnchantmentCache.getCache().forEach(enchantment -> {
+            if (string.contains(enchantment.getName()))
+                contains.set(true);
+        });
+        return contains.get();
     }
 }

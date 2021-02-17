@@ -2,6 +2,8 @@ package by.thmihnea.prophecymining;
 
 import by.thmihnea.prophecymining.bootstrap.Bootstrapper;
 import by.thmihnea.prophecymining.cache.MiningPlayer;
+import by.thmihnea.prophecymining.enchantment.EnchantmentManager;
+import by.thmihnea.prophecymining.enchantment.EnchantmentWrapper;
 import by.thmihnea.prophecymining.listener.BlockBreakListener;
 import by.thmihnea.prophecymining.listener.PlayerJoinListener;
 import by.thmihnea.prophecymining.listener.PlayerQuitListener;
@@ -44,6 +46,8 @@ public class ProphecyMining extends AbstractPlugin {
         this.sqlUtil = new SQLUtil(this.bootstrapper.getSqlConnection());
         this.sqlUtil.setupDefaults();
         this.setupObjects();
+        this.setupEnchantments();
+        EnchantmentManager.register();
         this.logInfo("Plugin successfully enabled. Process took: " + this.getTimeEnabled() + "ms");
     }
 
@@ -88,5 +92,16 @@ public class ProphecyMining extends AbstractPlugin {
             this.logSevere("SmartInvs dependency was not found! Disabling ProphecyMining.");
             this.setEnabled(false);
         }
+    }
+
+    private void setupEnchantments() {
+        EnchantmentWrapper AUTO_PICKUP = new EnchantmentWrapper("autopickup", "Auto Pickup", 1);
+        EnchantmentWrapper AUTO_SELL = new EnchantmentWrapper("autosell", "Auto Sell", 1);
+        EnchantmentWrapper LUCK = new EnchantmentWrapper("luck", "Luck", 5);
+        EnchantmentWrapper DRILL = new EnchantmentWrapper("drill", "Drill", 1);
+        EnchantmentWrapper FORTUNE = new EnchantmentWrapper("fortune", "Fortune", 50);
+        EnchantmentWrapper EFFICIENCY = new EnchantmentWrapper("efficiency", "Efficiency", 50);
+        EnchantmentWrapper UNBREAKING = new EnchantmentWrapper("unbreaking", "Unbreaking", 50);
+        EnchantmentWrapper MENDING = new EnchantmentWrapper("mending", "Mending", 1);
     }
 }

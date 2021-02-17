@@ -8,6 +8,7 @@ MySQL:
   password: ""
 
 lang:
+  only_players: "&cThis command can only be accessed by players!"
   levelup_message:
     - "&8&m----------------------------"
     - ""
@@ -44,6 +45,9 @@ lang:
   add_coins: "&eYou have added %amount% coins to %player%'s balance!"
   remove_coins: "&eYou have removed %amount% coins from %player%'s balance!"
   set_coins: "&eYou have set %player%'s coins to: %amount%"
+  coins_subtracted: "&e%amount% coins have been subtracted from your balance."
+  coins_added: "&e%amount% coins have been added to your balance."
+  coins_removed: "&e%amount% coins have been subtracted from your balance."
   command_not_found: "&cThis command doesn't exist! Please try again."
   no_permission: "&cYou don't have sufficient permissions to run this command!"
   rare_drop: "&6&lRARE DROP! &eYou've received a: %dropName%"
@@ -57,6 +61,47 @@ lang:
   not_enough_items: "&cYou don't have any items of this type in your inventory!"
   close_menu: "&cGo Back"
   no_match: "&c(No items matching found!)"
+  enchantment_shop_title: "&6&lENCHANTMENT SHOP"
+  require_hold_pickaxe: "&cYou have to hold a pickaxe in order to access the Enchanting Menu!"
+  max_level: "&cYou have already applied this Enchantment up to the maximum level!"
+
+enchantments:
+  name: "&6%enchantName%"
+  buy: "&fApply this enchantment for &6%price%&f!"
+  autopickup:
+    price: 1250
+    lore:
+      - "&7Picks up items!"
+  autosell:
+    price: 2500
+    lore:
+      - "&7Automatically sells items!"
+  luck:
+    price: 500
+    lore:
+      - "&7Increases rare drop chances."
+  drill:
+    price: 1000
+    lore:
+      - "&7Digs in a 3x3 cube."
+  fortune:
+    price: 1500
+    lore:
+      - "&7Vanilla Minecraft fortune."
+      - "&6&lTESTING"
+  efficiency:
+    price: 2500
+    lore:
+      - "&7Vanilla Minecraft efficiency"
+      - "&eomega"
+  unbreaking:
+    price: 750
+    lore:
+      - "&7Efficiency"
+  mending:
+    price: 5000
+    lore:
+      - "&7Mending!"
 
 xp:
   coal:

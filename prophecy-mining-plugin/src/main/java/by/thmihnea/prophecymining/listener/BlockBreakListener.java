@@ -1,6 +1,5 @@
 package by.thmihnea.prophecymining.listener;
 
-import by.thmihnea.prophecymining.ProphecyMining;
 import by.thmihnea.prophecymining.Settings;
 import by.thmihnea.prophecymining.block.BlockExperience;
 import by.thmihnea.prophecymining.cache.MiningPlayer;
@@ -11,8 +10,6 @@ import by.thmihnea.prophecymining.util.CoinsUtil;
 import by.thmihnea.prophecymining.util.LangUtil;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.Instrument;
-import org.bukkit.Note;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;

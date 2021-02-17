@@ -37,6 +37,14 @@ public class Settings {
     public static final int COINS_DROP_CHANCE = ProphecyMining.getCfg().getInt("coins.drop_chance");
     public static final int COINS_LOWER = ProphecyMining.getCfg().getInt("coins.lower_bound");
     public static final int COINS_UPPER = ProphecyMining.getCfg().getInt("coins.upper_bound");
+    public static final int ENCHANTMENT_AUTOPICKUP_PRICE = ProphecyMining.getCfg().getInt("enchantments.autopickup.price");
+    public static final int ENCHANTMENT_AUTOSELL_PRICE = ProphecyMining.getCfg().getInt("enchantments.autosell.price");
+    public static final int ENCHANTMENT_LUCK_PRICE = ProphecyMining.getCfg().getInt("enchantments.luck.price");
+    public static final int ENCHANTMENT_DRILL_PRICE = ProphecyMining.getCfg().getInt("enchantments.drill.price");
+    public static final int ENCHANTMENT_FORTUNE_PRICE = ProphecyMining.getCfg().getInt("enchantments.fortune.price");
+    public static final int ENCHANTMENT_EFFICIENCY_PRICE = ProphecyMining.getCfg().getInt("enchantments.efficiency.price");
+    public static final int ENCHANTMENT_UNBREAKING_PRICE = ProphecyMining.getCfg().getInt("enchantments.unbreaking.price");
+    public static final int ENCHANTMENT_MENDING_PRICE = ProphecyMining.getCfg().getInt("enchantments.mending.price");
 
     /**
      * Language variables.
@@ -46,6 +54,7 @@ public class Settings {
     public static final List<String> LANG_SHOP_ITEM_BUY_LORE = LangUtil.translateLoreColorCodes(ProphecyMining.getCfg().getStringList("lang.shop_item_buy_lore"));
     public static final List<String> LANG_SHOP_ITEM_SELL_LORE = LangUtil.translateLoreColorCodes(ProphecyMining.getCfg().getStringList("lang.shop_item_sell_lore"));
     public static final String LANG_NO_MATCH = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.no_match")));
+    public static final String LANG_ONLY_PLAYERS = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.only_players")));
     public static final String LANG_CLOSE_MENU = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.close_menu")));
     public static final String LANG_ITEM_BUY_NAME = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.shop_item_buy_name")));
     public static final String LANG_ITEM_SELL_NAME = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.shop_item_sell_name")));
@@ -69,6 +78,13 @@ public class Settings {
     public static final String LANG_BUY_MESSAGE = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.buy_message")));
     public static final String LANG_NOT_ENOUGH_ITEMS = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.not_enough_items")));
     public static final String LANG_SELL_MESSAGE = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.sell_message")));
+    public static final String LANG_ENCHANTMENT_SHOP = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.enchantment_shop_title")));
+    public static final String LANG_HOLD_PICKAXE = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.require_hold_pickaxe")));
+    public static final String LANG_COINS_SUBTRACTED = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.coins_subtracted")));
+    public static final String LANG_COINS_ADDED = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.coins_added")));
+    public static final String LANG_MAX_LEVEL = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.max_level")));
+    public static final String LANG_ENCHANTMENTS_BUY = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("enchantments.buy")));
+    public static final String LANG_ENCHANTMENTS_NAME = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("enchantments.name")));
 
     /**
      * Runnable utils.
