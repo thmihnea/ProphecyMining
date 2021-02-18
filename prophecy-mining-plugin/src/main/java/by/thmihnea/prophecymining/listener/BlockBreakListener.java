@@ -81,7 +81,7 @@ public class BlockBreakListener implements Listener {
     }
 
     private void applyDrill(Player player, ItemStack itemInHand, Block b) {
-        if (b.getType().toString().toUpperCase().contains("ORE") || b.getType() == Material.STONE) {
+        if (b.getType().toString().toUpperCase().contains("ORE") || b.getType() == Material.STONE || b.getType() == Material.COBBLESTONE) {
             player.getWorld().spawnParticle(Particle.CLOUD, b.getLocation(), 0);
             BlockBreakEvent blockBreakEvent = new BlockBreakEvent(b, player);
             Bukkit.getPluginManager().callEvent(blockBreakEvent);

@@ -11,16 +11,20 @@ import com.sk89q.worldedit.LocalSession;
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.world.World;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -49,12 +53,8 @@ public class CommandCreate extends AbstractCommand {
         }
         String name = this.getArgs()[0];
         File regionDirectory = ProphecyMining.getInstance().getRegionDirectory();
-        AtomicBoolean exists = new AtomicBoolean(false);
-        Arrays.stream(regionDirectory.listFiles()).forEach(file -> {
-            String fileName = file.getName().substring(0, file.getName().lastIndexOf('.'));
-            if (fileName.equalsIgnoreCase(name)) exists.set(true);
-        });
-        if (exists.get()) {
+        boolean exists = this.exists(name, regionDirectory);
+        if (exists) {
             this.sendMessage(Settings.LANG_NAME_ALREADY_EXISTS.replace("%name%", name));
             return;
         }
@@ -92,18 +92,35 @@ public class CommandCreate extends AbstractCommand {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        AtomicInteger counter = new AtomicInteger(1);
-        cuboidRegion.getBlocks().forEach(block -> {
-            if (block.getType() != Material.SPONGE && block.getType() != Material.STONE) return;
-            this.addBlockToRegionFile(counter, block, fileConfiguration);
-            try {
-                fileConfiguration.save(regionFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            counter.set(counter.get() + 1);
+        CompletableFuture.runAsync(() -> {
+            cuboidRegion.getBlocks().forEach(block -> {
+                this.saveBlock(cuboidRegion, regionFile, fileConfiguration, block);
+            });
+        }).thenRun(() -> {
+            this.sendMessage(Settings.LANG_REGION_CREATED.replace("%name%", name));
+            ProphecyMining.getInstance().logInfo("It is recommended that you reload the server after the implementation of a region!");
         });
-        RegionBootstrapper.setupBlocks(fileConfiguration, cuboidRegion.getWorld(), cuboidRegion);
+    }
+
+    private void saveBlock(CuboidRegion cuboidRegion, File regionFile, FileConfiguration fileConfiguration, Block block) {
+        AtomicInteger counter = new AtomicInteger(1);
+        if (block.getType() != Material.SPONGE && block.getType() != Material.STONE) return;
+        this.addBlockToRegionFile(counter, block, fileConfiguration);
+        try {
+            fileConfiguration.save(regionFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        counter.set(counter.get() + 1);
+    }
+
+    private boolean exists(String name, File regionDirectory) {
+        AtomicBoolean exists = new AtomicBoolean(false);
+        Arrays.stream(regionDirectory.listFiles()).forEach(file -> {
+            String fileName = file.getName().substring(0, file.getName().lastIndexOf('.'));
+            if (fileName.equalsIgnoreCase(name)) exists.set(true);
+        });
+        return exists.get();
     }
 
     private void saveRegionToFile(String name, String type, Location l1, Location l2, CuboidRegion cuboidRegion, File regionFile, FileConfiguration fileConfiguration) throws IOException {

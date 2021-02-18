@@ -1,7 +1,6 @@
 package by.thmihnea.prophecymining.region;
 
 import lombok.Getter;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -154,7 +153,7 @@ public class CuboidRegion {
     }
 
     public void addStone(Block block) {
-        this.stones.remove(block);
+        this.stones.add(block);
     }
 
     public void removeStone(Block block) {

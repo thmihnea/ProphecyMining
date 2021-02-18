@@ -47,6 +47,7 @@ public class Settings {
     public static final int ENCHANTMENT_EFFICIENCY_PRICE = ProphecyMining.getCfg().getInt("enchantments.efficiency.price");
     public static final int ENCHANTMENT_UNBREAKING_PRICE = ProphecyMining.getCfg().getInt("enchantments.unbreaking.price");
     public static final int ENCHANTMENT_MENDING_PRICE = ProphecyMining.getCfg().getInt("enchantments.mending.price");
+    public static final int REGION_ROLLBACK_TIME = ProphecyMining.getCfg().getInt("region.time");
 
     /**
      * Language variables.
@@ -56,6 +57,11 @@ public class Settings {
     public static final List<String> LANG_SHOP_ITEM_BUY_LORE = LangUtil.translateLoreColorCodes(ProphecyMining.getCfg().getStringList("lang.shop_item_buy_lore"));
     public static final List<String> LANG_SHOP_ITEM_SELL_LORE = LangUtil.translateLoreColorCodes(ProphecyMining.getCfg().getStringList("lang.shop_item_sell_lore"));
     public static final List<String> LANG_REGION_HELP_MESSAGE = LangUtil.translateLoreColorCodes(ProphecyMining.getCfg().getStringList("lang.region_help_message"));
+    public static final String LANG_REGION_FORMAT = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.region_format")));
+    public static final String LANG_DISPLAYING_REGIONS = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.displaying_regions")));
+    public static final String LANG_REGION_CREATED = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.region_created")));
+    public static final String LANG_REGION_REMOVED = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.region_removed")));
+    public static final String LANG_NO_REGION_FOUND = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.region_not_found")));
     public static final String LANG_SPECIFY_NAME = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.specify_name")));
     public static final String LANG_SPECIFY_TYPE = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.specify_type")));
     public static final String LANG_TYPE_INVALID = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.type_invalid")));

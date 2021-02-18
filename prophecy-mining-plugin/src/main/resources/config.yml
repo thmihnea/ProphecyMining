@@ -75,8 +75,16 @@ lang:
   specify_type: "&cSpecify a region type!"
   type_invalid: "&cNo type matching %arg% was found! Please try again."
   name_already_exists: "&cA region named %name% already exists!"
+  region_not_found: "No region named %name% was found while attempting lookup!"
   need_selection_first: "&cPlease, make a WorldEdit selection before utilizing this command!"
   incomplete_region: "&cPlease, select both parts of the region before utilizing this command!"
+  region_created: "&6&lREGION - &eSuccessfully created a new region named: %name%"
+  region_removed: "&6&lREGION - &eSuccessfully removed a region named: %name%"
+  displaying_regions: "&6Displaying all valid regions... &7&o(This process might take a while)"
+  region_format: "&6(*) &8- &e%regionName% &7(%ores% | %stones%) &e- &6Type: &e%type% &8/ &6"
+
+region:
+  time: 2 # Set in seconds.
 
 enchantments:
   luck_bonus_chance_per_level: 5

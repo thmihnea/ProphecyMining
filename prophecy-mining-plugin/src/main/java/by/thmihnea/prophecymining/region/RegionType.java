@@ -13,6 +13,7 @@ public enum RegionType {
     IRON(Material.IRON_ORE, "iron"),
     LAPIS(Material.LAPIS_ORE, "lapis"),
     GOLD(Material.GOLD_ORE, "gold"),
+    REDSTONE(Material.REDSTONE_ORE, "redstone"),
     DIAMOND(Material.DIAMOND_ORE, "diamond"),
     EMERALD(Material.EMERALD_ORE, "emerald");
 
