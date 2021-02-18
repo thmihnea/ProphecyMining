@@ -7,6 +7,7 @@ import by.thmihnea.prophecymining.cache.MiningPlayer;
 import by.thmihnea.prophecymining.cache.MiningPlayerManager;
 import by.thmihnea.prophecymining.coins.CoinsDrop;
 import by.thmihnea.prophecymining.item.ItemCache;
+import by.thmihnea.prophecymining.region.block.RegionBlock;
 import by.thmihnea.prophecymining.util.CoinsUtil;
 import by.thmihnea.prophecymining.util.EnchantUtil;
 import by.thmihnea.prophecymining.util.ItemUtil;
@@ -29,48 +30,54 @@ public class BlockBreakListener implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
+        if (e.isCancelled()) return;
         Block block = e.getBlock();
-
+        Material beforeType = block.getType();
         BlockExperience blockExperience = BlockExperience.getFromMaterial(block.getType());
         Player player = e.getPlayer();
         MiningPlayer miningPlayer = MiningPlayerManager.getMiningPlayer(player);
         ItemStack itemInHand = player.getInventory().getItemInMainHand();
         if (blockExperience != null) {
-            int xpToAdd = blockExperience.computeExperience();
+            if (RegionBlock.hasMetadata(block)) {
+                int xpToAdd = blockExperience.computeExperience();
 
-            miningPlayer.setCurrentXp(miningPlayer.getCurrentXp() + xpToAdd);
-            if (miningPlayer.getCurrentXp() >= miningPlayer.getXpToNextLevel()) {
-                miningPlayer.levelUp();
-            }
+                miningPlayer.setCurrentXp(miningPlayer.getCurrentXp() + xpToAdd);
+                if (miningPlayer.getCurrentXp() >= miningPlayer.getXpToNextLevel()) {
+                    miningPlayer.levelUp();
+                }
 
-            this.sendBarMessage(player, xpToAdd, miningPlayer);
-            miningPlayer.setBlocksMined(blockExperience.getFieldName(), miningPlayer.getBlocksMined(blockExperience.getFieldName()) + 1);
-            int additionalChance = this.getAdditionalChance(player);
-            ItemStack itemStack = ItemCache.computeDrop(additionalChance);
+                this.sendBarMessage(player, xpToAdd, miningPlayer);
+                miningPlayer.setBlocksMined(blockExperience.getFieldName(), miningPlayer.getBlocksMined(blockExperience.getFieldName()) + 1);
+                int additionalChance = this.getAdditionalChance(player);
+                ItemStack itemStack = ItemCache.computeDrop(additionalChance);
 
-            if (itemStack != null) {
-                this.sendDropMessage(player, itemStack);
-                boolean sell = this.canSell(itemInHand);
-                player.getInventory().addItem(itemStack);
-                if (sell) {
-                    Bukkit.getScheduler().scheduleSyncDelayedTask(ProphecyMining.getInstance(), () -> {
-                        ItemUtil.sellOne(player, Objects.requireNonNull(ItemCache.getFromItemStack(itemStack)));
-                    }, 3L);
+                if (itemStack != null) {
+                    this.sendDropMessage(player, itemStack);
+                    boolean sell = this.canSell(itemInHand);
+                    player.getInventory().addItem(itemStack);
+                    if (sell) {
+                        Bukkit.getScheduler().scheduleSyncDelayedTask(ProphecyMining.getInstance(), () -> {
+                            ItemUtil.sellOne(player, Objects.requireNonNull(ItemCache.getFromItemStack(itemStack)));
+                        }, 3L);
+                    }
+                }
+                int coins = CoinsDrop.computeDrop(additionalChance);
+                if (coins != 0) {
+                    this.sendCoinsMessage(player, coins);
+                    CoinsUtil.addCoins(player.getUniqueId().toString(), coins);
                 }
             }
-            int coins = CoinsDrop.computeDrop(additionalChance);
-            if (coins != 0) {
-                this.sendCoinsMessage(player, coins);
-                CoinsUtil.addCoins(player.getUniqueId().toString(), coins);
-            }
-        };
-        if (EnchantUtil.containsEnchant(itemInHand, "drill") && (miningPlayer.canUseDrill())) {
-            miningPlayer.setUsedDrill(false);
-            this.getBlocks(block, 1).forEach(b -> {
-                this.applyDrill(player, itemInHand, b);
-            });
-            player.playSound(player.getLocation(), Sound.ENTITY_WITHER_BREAK_BLOCK, 1.0f, 1.0f);
         }
+        if (EnchantUtil.containsEnchant(itemInHand, "drill") && (miningPlayer.canUseDrill())) {
+            if (RegionBlock.hasMetadata(block)) {
+                miningPlayer.setUsedDrill(false);
+                this.getBlocks(block, 1).forEach(b -> {
+                    this.applyDrill(player, itemInHand, b);
+                });
+                player.playSound(player.getLocation(), Sound.ENTITY_WITHER_BREAK_BLOCK, 1.0f, 1.0f);
+            }
+        }
+        Bukkit.getScheduler().scheduleSyncDelayedTask(ProphecyMining.getInstance(), () -> RegionBlock.computeNextBlockType(block, beforeType), 1L);
     }
 
     private void applyDrill(Player player, ItemStack itemInHand, Block b) {

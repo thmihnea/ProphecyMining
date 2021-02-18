@@ -23,6 +23,11 @@ lang:
     - "&8/&ecoins set <player> <amount>"
     - "&8/&ecoins add <player> <amount>"
     - "&8/&ecoins take <player> <amount>"
+  region_help_message:
+    - "&eThe following commands are available:"
+    - "&8/&esbregion create <regionName> <type>"
+    - "&8/&esbregion delete <regionName>"
+    - "&8/&esbregion list"
   shop_item_sell_name: "&6* &fSell &e%amount% &fof %itemName%"
   shop_item_buy_name: "&6* &fBuy &e%amount% &fof %itemName%"
   shop_item_buy_lore:
@@ -66,6 +71,12 @@ lang:
   max_level: "&cYou have already applied this Enchantment up to the maximum level!"
   not_enough_money: "&cNOT ENOUGH MONEY"
   inventory_full: "&cYour inventory is full!"
+  specify_name: "&cSpecify a region name!"
+  specify_type: "&cSpecify a region type!"
+  type_invalid: "&cNo type matching %arg% was found! Please try again."
+  name_already_exists: "&cA region named %name% already exists!"
+  need_selection_first: "&cPlease, make a WorldEdit selection before utilizing this command!"
+  incomplete_region: "&cPlease, select both parts of the region before utilizing this command!"
 
 enchantments:
   luck_bonus_chance_per_level: 5

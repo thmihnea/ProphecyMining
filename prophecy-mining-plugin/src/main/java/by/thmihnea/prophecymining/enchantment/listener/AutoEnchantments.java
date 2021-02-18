@@ -22,6 +22,7 @@ public class AutoEnchantments implements Listener {
 
     @EventHandler (priority = EventPriority.HIGH)
     public void onBlockBreak(BlockBreakEvent e) {
+        if (e.isCancelled()) return;
         Player player = e.getPlayer();
         Block block = e.getBlock();
         ItemStack itemStack = player.getInventory().getItemInMainHand();

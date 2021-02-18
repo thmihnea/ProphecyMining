@@ -49,6 +49,8 @@ public class Placeholders extends PlaceholderExpansion {
                 return String.valueOf(miningPlayer.getBlocksMined("IRON_MINED"));
             case "diamond_mined":
                 return String.valueOf(miningPlayer.getBlocksMined("DIAMOND_MINED"));
+            case "emerald_mined":
+                return String.valueOf(miningPlayer.getBlocksMined("EMERALD_MINED"));
             case "current_xp":
                 return LangUtil.formatNumber(miningPlayer.getCurrentXp());
             case "xp_to_next_level":

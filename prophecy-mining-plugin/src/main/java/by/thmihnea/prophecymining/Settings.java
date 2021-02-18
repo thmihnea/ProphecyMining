@@ -1,6 +1,7 @@
 package by.thmihnea.prophecymining;
 
 import by.thmihnea.prophecymining.util.LangUtil;
+import net.milkbowl.vault.chat.Chat;
 import org.bukkit.ChatColor;
 
 import java.util.List;
@@ -54,6 +55,13 @@ public class Settings {
     public static final List<String> LANG_COINS_HELP_MESSAGE = LangUtil.translateLoreColorCodes(ProphecyMining.getCfg().getStringList("lang.coins_help_message"));
     public static final List<String> LANG_SHOP_ITEM_BUY_LORE = LangUtil.translateLoreColorCodes(ProphecyMining.getCfg().getStringList("lang.shop_item_buy_lore"));
     public static final List<String> LANG_SHOP_ITEM_SELL_LORE = LangUtil.translateLoreColorCodes(ProphecyMining.getCfg().getStringList("lang.shop_item_sell_lore"));
+    public static final List<String> LANG_REGION_HELP_MESSAGE = LangUtil.translateLoreColorCodes(ProphecyMining.getCfg().getStringList("lang.region_help_message"));
+    public static final String LANG_SPECIFY_NAME = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.specify_name")));
+    public static final String LANG_SPECIFY_TYPE = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.specify_type")));
+    public static final String LANG_TYPE_INVALID = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.type_invalid")));
+    public static final String LANG_INCOMPLETE_REGION = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.incomplete_region")));
+    public static final String LANG_NEED_SELECTION_FIRST = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.need_selection_first")));
+    public static final String LANG_NAME_ALREADY_EXISTS = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.name_already_exists")));
     public static final String LANG_INVENTORY_FULL = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.inventory_full")));
     public static final String LANG_NO_MATCH = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.no_match")));
     public static final String LANG_ONLY_PLAYERS = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(ProphecyMining.getCfg().getString("lang.only_players")));

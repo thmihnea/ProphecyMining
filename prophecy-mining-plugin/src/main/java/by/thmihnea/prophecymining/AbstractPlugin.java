@@ -25,6 +25,8 @@ public abstract class AbstractPlugin extends JavaPlugin {
      */
     private static FileConfiguration cfg = YamlConfiguration.loadConfiguration(config);
 
+    private static File regionDirectory;
+
     /**
      * The abstract class' instance.
      */
@@ -37,6 +39,10 @@ public abstract class AbstractPlugin extends JavaPlugin {
      */
     public String getVersion() {
         return getDescription().getVersion();
+    }
+
+    public File getRegionDirectory() {
+        return regionDirectory;
     }
 
     /**
@@ -97,6 +103,10 @@ public abstract class AbstractPlugin extends JavaPlugin {
      */
     public static boolean hasInstance() {
         return instance != null;
+    }
+
+    public void setRegionDirectory(File file) {
+        regionDirectory = file;
     }
 
     /**
@@ -210,6 +220,9 @@ public abstract class AbstractPlugin extends JavaPlugin {
     protected final void setupFiles() {
         File dir = new File("plugins", getName());
         if (!(dir.exists())) dir.mkdir();
+        File regionDir = new File("plugins/" + getName() + "/regions");
+        if (!(regionDir.exists())) regionDir.mkdir();
+        this.setRegionDirectory(regionDir);
         if (!(getConfigFile().exists())) saveDefaultConfig();
         try {
             getCfg().load(getConfigFile());

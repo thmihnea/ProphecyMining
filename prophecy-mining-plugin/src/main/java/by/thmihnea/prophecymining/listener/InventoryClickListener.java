@@ -24,11 +24,4 @@ public class InventoryClickListener implements Listener {
             e.setCancelled(true);
         }
     }
-
-    @EventHandler
-    public void onChat(AsyncPlayerChatEvent e) {
-        String message = e.getMessage();
-        message = PlaceholderAPI.setPlaceholders(e.getPlayer(), message);
-        e.setMessage(message);
-    }
 }
