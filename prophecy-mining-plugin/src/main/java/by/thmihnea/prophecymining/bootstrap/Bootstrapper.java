@@ -7,6 +7,7 @@ import by.thmihnea.prophecymining.command.EnchanterCommand;
 import by.thmihnea.prophecymining.command.RareItemShopCommand;
 import by.thmihnea.prophecymining.data.SQLConnection;
 import by.thmihnea.prophecymining.item.ItemCache;
+import by.thmihnea.prophecymining.placeholder.Placeholders;
 import lombok.Getter;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -20,6 +21,7 @@ public class Bootstrapper {
     private RareItemShopCommand rareItemShopCommand;
     private EnchanterCommand enchanterCommand;
     private Economy economy;
+    private Placeholders placeholders;
 
     public Bootstrapper() {
         this.init();
@@ -35,6 +37,7 @@ public class Bootstrapper {
         this.coinsCommandHandler = new CoinsCommandHandler();
         this.rareItemShopCommand = new RareItemShopCommand();
         this.enchanterCommand = new EnchanterCommand();
+        this.placeholders = new Placeholders();
         if (!(this.setupEconomy())) {
             ProphecyMining.getInstance().logSevere("Vault API was not loaded! Please double-check everything!");
         }

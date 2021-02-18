@@ -152,6 +152,7 @@ public class BlockBreakListener implements Listener {
                 }
             }
         }
+        blocks.remove(start);
         return blocks;
     }
 }

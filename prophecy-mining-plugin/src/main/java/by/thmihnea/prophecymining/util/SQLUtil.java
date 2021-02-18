@@ -128,6 +128,38 @@ public class SQLUtil {
         return preparedStatement;
     }
 
+    public int getPosition(Player player) {
+        String statement = "SELECT * FROM `player_levels` ORDER BY `LEVEL` DESC, `CURRENT_XP` DESC";
+        try {
+            PreparedStatement preparedStatement = this.getSqlConnection()
+                    .getConnection().prepareStatement(statement);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            int count = 1;
+            while (resultSet.next() && !resultSet.getString("UUID").equals(player.getUniqueId().toString())) {
+                count++;
+            }
+            return count;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return -1;
+        }
+    }
+
+    public int getTotalPlayers() {
+        String statement = "SELECT * FROM `player_levels`";
+        try {
+            PreparedStatement preparedStatement = this.getSqlConnection()
+                    .getConnection().prepareStatement(statement);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            int count = 0;
+            while (resultSet.next()) count++;
+            return count;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return -1;
+        }
+    }
+
     public int getValue(TableType tableType, String field, String uniqueId) {
         String statement = "SELECT * FROM `" + tableType.getName() + "` WHERE UUID = ?";
         try {

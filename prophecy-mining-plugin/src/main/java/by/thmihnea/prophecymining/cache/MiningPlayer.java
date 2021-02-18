@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Getter
 @Setter
@@ -113,6 +114,16 @@ public class MiningPlayer {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
         }
         this.setCurrentXpSQL(currentXp);
+    }
+
+    public int getMined(String type) {
+        return this.blocksMined.get(type);
+    }
+
+    public int getAllBlocksMined() {
+        AtomicInteger count = new AtomicInteger(0);
+        this.blocksMined.keySet().forEach(key -> count.set(count.get() + this.blocksMined.get(key)));
+        return count.get();
     }
 
     public void setBlocksMined(String field, int value) {

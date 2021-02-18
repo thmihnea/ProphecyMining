@@ -10,6 +10,7 @@ depend:
   - SmartInvs
   - ShopGUIPlus
   - Vault
+  - PlaceholderAPI
 
 commands:
   coins:

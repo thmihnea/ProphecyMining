@@ -57,6 +57,7 @@ public class AutoEnchantments implements Listener {
 
     private void sellDrop(Player player, ItemStack drop) {
         ShopItem shopItem = ShopGuiPlusApi.getItemStackShopItem(drop);
+        if (shopItem == null) return;
         double price = shopItem.getSellPrice() * drop.getAmount();
         Economy economy = ProphecyMining.getInstance().getBootstrapper().getEconomy();
         economy.depositPlayer(player, price);

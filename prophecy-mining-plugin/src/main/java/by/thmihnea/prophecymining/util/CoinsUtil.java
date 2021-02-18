@@ -6,6 +6,7 @@ import by.thmihnea.prophecymining.data.TableType;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.text.DecimalFormat;
 import java.util.UUID;
 
 public class CoinsUtil {
@@ -38,5 +39,20 @@ public class CoinsUtil {
 
     public static int getCoins(String uniqueId) {
         return sqlUtil.getValue(TableType.PLAYER_COINS, "COINS", uniqueId);
+    }
+
+    public static String getCoinsFormatted(Player player) {
+        int coins = getCoins(player.getUniqueId().toString());
+        DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(2);
+        if (coins < 1000000) {
+            return coins / 1000 + "K";
+        } else if (coins < 1000000000) {
+            float div = (float) coins / (float) 1000000;
+            return df.format(div) + "M";
+        } else {
+            float div = (float) coins / (float) 1000000000;
+            return df.format(div) + "B";
+        }
     }
 }

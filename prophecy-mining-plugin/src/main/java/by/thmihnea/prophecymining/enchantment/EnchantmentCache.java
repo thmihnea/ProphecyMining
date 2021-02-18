@@ -17,6 +17,14 @@ public class EnchantmentCache {
         cache.remove(enchantment);
     }
 
+    public static Enchantment getFromKey(String key) {
+        for (Enchantment enchantment : cache) {
+            if (enchantment.getKey().getKey().equals(key))
+                return enchantment;
+        }
+        return null;
+    }
+
     public static List<Enchantment> getCache() {
         return cache;
     }

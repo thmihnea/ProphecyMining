@@ -1,10 +1,12 @@
 package by.thmihnea.prophecymining.util;
 
 import by.thmihnea.prophecymining.Settings;
+import by.thmihnea.prophecymining.enchantment.EnchantmentCache;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class EnchantUtil {
@@ -12,7 +14,6 @@ public class EnchantUtil {
     public static boolean canEnchant(Enchantment enchantment, ItemStack itemStack) {
         if (!(itemStack.getEnchantments().containsKey(enchantment))) return true;
         if (enchantment.getKey().equals(Enchantment.DIG_SPEED.getKey())
-            || enchantment.getKey().equals(Enchantment.LUCK.getKey())
             || enchantment.getKey().equals(Enchantment.DURABILITY.getKey())) return true;
         int currentLevel = itemStack.getEnchantments().get(enchantment);
         return currentLevel < enchantment.getMaxLevel();
@@ -28,10 +29,14 @@ public class EnchantUtil {
             player.sendMessage(Settings.LANG_MAX_LEVEL);
             return;
         }
-        CoinsUtil.takeCoins(player.getUniqueId().toString(), coins);
         int level = 0;
         if (itemStack.getEnchantments().containsKey(enchantment)) level = itemStack.getEnchantments().get(enchantment);
+        if (level == Objects.requireNonNull(EnchantmentCache.getFromKey(enchantment.getKey().getKey())).getMaxLevel()) {
+            player.sendMessage(Settings.LANG_MAX_LEVEL);
+            return;
+        }
         itemStack.addUnsafeEnchantment(enchantment, level + 1);
+        CoinsUtil.takeCoins(player.getUniqueId().toString(), coins);
     }
 
     public static Enchantment getEnchantmentByKey(ItemStack itemStack, String key) {

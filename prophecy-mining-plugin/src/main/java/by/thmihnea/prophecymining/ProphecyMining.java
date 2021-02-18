@@ -102,16 +102,20 @@ public class ProphecyMining extends AbstractPlugin {
             this.logSevere("ShopGUI+ dependency was not found! Disabling ProphecyMining.");
             this.setEnabled(false);
         }
+        else if (!(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI"))) {
+            this.logSevere("PlaceholderAPI dependency was not found! Disabling ProphecyMining.");
+            this.setEnabled(false);
+        }
     }
 
     private void setupEnchantments() {
+        EnchantmentWrapper EFFICIENCY = new EnchantmentWrapper("efficiency", "Efficiency", 10);
+        EnchantmentWrapper UNBREAKING = new EnchantmentWrapper("unbreaking", "Unbreaking", 10);
+        EnchantmentWrapper FORTUNE = new EnchantmentWrapper("fortune", "Fortune", 3);
+        EnchantmentWrapper MENDING = new EnchantmentWrapper("mending", "Mending", 1);
         EnchantmentWrapper AUTO_PICKUP = new EnchantmentWrapper("autopickup", "Auto Pickup", 1);
         EnchantmentWrapper AUTO_SELL = new EnchantmentWrapper("autosell", "Auto Sell", 1);
         EnchantmentWrapper LUCK = new EnchantmentWrapper("luck", "Luck", 5);
         EnchantmentWrapper DRILL = new EnchantmentWrapper("drill", "Drill", 1);
-        EnchantmentWrapper FORTUNE = new EnchantmentWrapper("fortune", "Fortune", 50);
-        EnchantmentWrapper EFFICIENCY = new EnchantmentWrapper("efficiency", "Efficiency", 50);
-        EnchantmentWrapper UNBREAKING = new EnchantmentWrapper("unbreaking", "Unbreaking", 50);
-        EnchantmentWrapper MENDING = new EnchantmentWrapper("mending", "Mending", 1);
     }
 }
