@@ -92,17 +92,30 @@ public class CommandCreate extends AbstractCommand {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        CompletableFuture.runAsync(() -> {
+        /*CompletableFuture.runAsync(() -> {
             cuboidRegion.getBlocks().forEach(block -> {
                 this.saveBlock(cuboidRegion, regionFile, fileConfiguration, block);
             });
         }).thenRun(() -> {
             this.sendMessage(Settings.LANG_REGION_CREATED.replace("%name%", name));
             ProphecyMining.getInstance().logInfo("It is recommended that you reload the server after the implementation of a region!");
+        });*/
+        AtomicInteger counter = new AtomicInteger(1);
+        cuboidRegion.getBlocks().forEach(block -> {
+            if (block.getType() != Material.SPONGE && block.getType() != Material.STONE) return;
+            this.addBlockToRegionFile(counter, block, fileConfiguration);
+            try {
+                fileConfiguration.save(regionFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            counter.set(counter.get() + 1);
         });
+        this.sendMessage(Settings.LANG_REGION_CREATED.replace("%name%", name));
+        ProphecyMining.getInstance().logInfo("It is recommended that you reload the server after the implementation of a region!");
     }
 
-    private void saveBlock(CuboidRegion cuboidRegion, File regionFile, FileConfiguration fileConfiguration, Block block) {
+    /*private void saveBlock(CuboidRegion cuboidRegion, File regionFile, FileConfiguration fileConfiguration, Block block) {
         AtomicInteger counter = new AtomicInteger(1);
         if (block.getType() != Material.SPONGE && block.getType() != Material.STONE) return;
         this.addBlockToRegionFile(counter, block, fileConfiguration);
@@ -112,7 +125,7 @@ public class CommandCreate extends AbstractCommand {
             e.printStackTrace();
         }
         counter.set(counter.get() + 1);
-    }
+    }*/
 
     private boolean exists(String name, File regionDirectory) {
         AtomicBoolean exists = new AtomicBoolean(false);

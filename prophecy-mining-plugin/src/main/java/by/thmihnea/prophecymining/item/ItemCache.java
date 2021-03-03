@@ -36,11 +36,12 @@ public class ItemCache {
             int chance = ProphecyMining.getCfg().getInt("drops." + key + ".chance");
             int buyPrice = ProphecyMining.getCfg().getInt("drops." + key + ".buy_price");
             int sellPrice = ProphecyMining.getCfg().getInt("drops." + key + ".sell_price");
+            boolean canBuy = ProphecyMining.getCfg().getBoolean("drops." + key + ".can_buy");
             List<String> lore = LangUtil.translateLoreColorCodes(ProphecyMining.getCfg().getStringList("drops." + key + ".lore"));
 
             Material material = Material.valueOf(materialName);
 
-            Drop drop = new Drop(material, displayName, chance, lore, buyPrice, sellPrice);
+            Drop drop = new Drop(material, displayName, chance, lore, buyPrice, sellPrice, canBuy);
             DropShopInventoryProvider dropShopInventoryProvider = new DropShopInventoryProvider(drop);
             DropShopCache.addEntry(drop, dropShopInventoryProvider);
             drops.add(drop);

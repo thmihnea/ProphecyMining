@@ -1,5 +1,6 @@
 package by.thmihnea.prophecymining.inventory;
 
+import by.thmihnea.prophecymining.ProphecyMining;
 import by.thmihnea.prophecymining.Settings;
 import by.thmihnea.prophecymining.item.Drop;
 import by.thmihnea.prophecymining.util.CoinsUtil;
@@ -47,22 +48,33 @@ public class DropShopInventoryProvider implements InventoryProvider {
         ItemStack sellOne = this.getSellOneItemStack(player, stackType);
         ItemStack sellAll = this.getSellAllItemStack(player, stackType);
         contents.set(3, 7, ClickableItem.of(barrier, e -> RareItemShopInventoryProvider.rareItemShop.open(player)));
-        contents.set(2, 2, ClickableItem.of(buyOne, e -> {
-            ItemUtil.buyOne(player, this.drop);
-            this.init(player, contents);
-        }));
-        contents.set(2, 3, ClickableItem.of(buyAll, e -> {
-            ItemUtil.buyAll(player, this.drop);
-            this.init(player, contents);
-        }));
-        contents.set(2, 5, ClickableItem.of(sellOne, e -> {
-            ItemUtil.sellOne(player, this.drop);
-            this.init(player, contents);
-        }));
-        contents.set(2, 6, ClickableItem.of(sellAll, e -> {
-            ItemUtil.sellAll(player, this.drop);
-            this.init(player, contents);
-        }));
+        if (this.drop.isCanBuy()) {
+            contents.set(2, 2, ClickableItem.of(buyOne, e -> {
+                ItemUtil.buyOne(player, this.drop);
+                this.init(player, contents);
+            }));
+            contents.set(2, 3, ClickableItem.of(buyAll, e -> {
+                ItemUtil.buyAll(player, this.drop);
+                this.init(player, contents);
+            }));
+            contents.set(2, 5, ClickableItem.of(sellOne, e -> {
+                ItemUtil.sellOne(player, this.drop);
+                this.init(player, contents);
+            }));
+            contents.set(2, 6, ClickableItem.of(sellAll, e -> {
+                ItemUtil.sellAll(player, this.drop);
+                this.init(player, contents);
+            }));
+        } else {
+            contents.set(2, 3, ClickableItem.of(sellOne, e -> {
+                ItemUtil.sellOne(player, this.drop);
+                this.init(player, contents);
+            }));
+            contents.set(2, 5, ClickableItem.of(sellAll, e -> {
+                ItemUtil.sellAll(player, this.drop);
+                this.init(player, contents);
+            }));
+        }
     }
 
     @Override

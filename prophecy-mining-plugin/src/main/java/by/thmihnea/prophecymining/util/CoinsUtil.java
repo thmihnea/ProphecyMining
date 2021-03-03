@@ -45,8 +45,12 @@ public class CoinsUtil {
         int coins = getCoins(player.getUniqueId().toString());
         DecimalFormat df = new DecimalFormat();
         df.setMaximumFractionDigits(2);
-        if (coins < 1000000) {
-            return coins / 1000 + "K";
+        if (coins < 1000) {
+            return String.valueOf(coins);
+        }
+        else if (coins < 1000000) {
+            float div = (float) coins / (float) 1000;
+            return df.format(div) + "k";
         } else if (coins < 1000000000) {
             float div = (float) coins / (float) 1000000;
             return df.format(div) + "M";

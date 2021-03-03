@@ -22,7 +22,7 @@ public class RareItemShopInventoryProvider implements InventoryProvider {
     public static final SmartInventory rareItemShop = SmartInventory.builder()
             .id("rareItemShop")
             .provider(new RareItemShopInventoryProvider())
-            .size(6, 9)
+            .size(3, 9)
             .title(Settings.LANG_RARE_ITEM_SHOP_TITLE)
             .build();
 

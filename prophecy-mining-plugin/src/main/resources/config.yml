@@ -155,6 +155,7 @@ coins:
 
 drops:
   amethyst:
+    can_buy: true
     name: "&5Amethyst"
     material: "DIAMOND"
     chance: 10
@@ -163,6 +164,7 @@ drops:
     lore:
       - "&7This is an Amethyst!"
   ruby:
+    can_buy: true
     name: "&cRuby"
     chance: 5
     material: "REDSTONE"
@@ -171,6 +173,7 @@ drops:
     lore:
       - "&7This is a Ruby!"
   gemstone:
+    can_buy: false
     name: "&aGemstone"
     chance: 3
     material: "EMERALD"
