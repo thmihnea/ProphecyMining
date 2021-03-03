@@ -37,15 +37,19 @@ public class RegionBlock {
             Bukkit.getScheduler().scheduleSyncDelayedTask(ProphecyMining.getInstance(), () -> block.setType(Material.STONE), rollBackTime * 20L);
         }
         else if (beforeType.toString().contains("ORE") && type.contains("ore")) {
-            block.setType(Material.COBBLESTONE);
-        }
-        else if (beforeType == Material.COBBLESTONE && type.contains("ore")) {
             block.setType(Material.BEDROCK);
             String typeCopy = type;
             typeCopy = typeCopy.toUpperCase();
             Material material = Material.valueOf(typeCopy);
             Bukkit.getScheduler().scheduleSyncDelayedTask(ProphecyMining.getInstance(), () -> block.setType(material), rollBackTime * 20L);
         }
+       /* else if (beforeType == Material.COBBLESTONE && type.contains("ore")) {
+            block.setType(Material.BEDROCK);
+            String typeCopy = type;
+            typeCopy = typeCopy.toUpperCase();
+            Material material = Material.valueOf(typeCopy);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(ProphecyMining.getInstance(), () -> block.setType(material), rollBackTime * 20L);
+        }*/
     }
 
     public static boolean hasMetadata(Block block) {
